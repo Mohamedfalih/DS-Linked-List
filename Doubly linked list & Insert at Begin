@@ -1,0 +1,82 @@
+#include<stdio.h>
+#include<stdlib.h>
+struct node
+{
+	int  data;
+	struct node *prev;
+	struct node *next;
+};
+void display(struct node *n)
+{
+
+    printf("The Linkd List is : ");
+	while ( n != NULL)
+	{
+	    
+		printf ("%d ", n->data);
+		n = n->next;
+	}
+	printf ("\n");
+}
+void insert_begin(struct node **head)
+{
+    int data;
+    struct node *n;
+    printf("Enter the data to be inserted: ");
+    scanf("%d",&data);
+    n=(struct node*)malloc(sizeof(struct node));
+    n->data=data;
+    n->next=*head;
+    n->prev=NULL;
+    (*head)->prev=n;
+    *head=n;
+    
+}
+int main ()
+{	int num ;
+	struct node *n;
+	printf("Enter number of nodes: ");
+	scanf("%d",&num);
+	struct node *head=(struct node*)malloc(sizeof(struct node));
+	printf("\nEnter data: \n");
+	scanf("%d",&head->data);
+	head->prev=NULL;
+	head->next=NULL;
+	struct node *tail = head;
+
+	for(int i=1; i<num; i++)
+	{
+		n=(struct node*)malloc(sizeof(struct node));
+		scanf("%d",&n->data);
+		n->prev=NULL;
+		n->next=NULL;
+		tail->next=n;
+		n->prev=tail;
+		tail=tail->next;
+
+	}
+	printf("Before Inserting: \n");
+	display(head);
+	insert_begin(&head);
+	printf("After Inserting: \n");
+	display(head);
+
+	return 0;
+}
+
+
+OUTPUT:
+
+
+Enter number of nodes: 5
+
+Enter data: 
+1 2 3 4 5 
+
+Before Inserting: 
+The Linkd List is : 1 2 3 4 5 
+
+Enter the data to be inserted: 0
+
+After Inserting: 
+The Linkd List is : 0 1 2 3 4 5 
